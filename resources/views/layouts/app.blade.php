@@ -34,6 +34,71 @@
         .sidebar .nav-link i {
             margin-right: 0.5rem;
         }
+        
+        /* Dropdown Menu Styles */
+        .dropdown-menu-toggle {
+            color: #adb5bd;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            text-decoration: none;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .dropdown-menu-toggle:hover {
+            color: #fff;
+            background: #495057;
+            text-decoration: none;
+        }
+        
+        .dropdown-menu-toggle.active {
+            color: #fff;
+            background: #495057;
+        }
+        
+        .dropdown-menu-toggle span i {
+            margin-right: 0.5rem;
+        }
+        
+        .dropdown-menu-toggle .bi-chevron-down {
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+        
+        .dropdown-menu-toggle[aria-expanded="true"] .bi-chevron-down {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu-custom {
+            background: #2d3136;
+            border: none;
+            padding: 0;
+            margin-top: 0;
+        }
+        
+        .dropdown-menu-custom .nav-item {
+            margin: 0;
+        }
+        
+        .dropdown-menu-custom .nav-link {
+            padding-left: 2.5rem;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        .dropdown-menu-custom .nav-link:hover,
+        .dropdown-menu-custom .nav-link.active {
+            border-left-color: #0d6efd;
+            background: #3a3f45;
+        }
     </style>
     
     @stack('styles')
@@ -48,7 +113,7 @@
                     <div class="position-sticky pt-3">
                         <div class="text-center mb-4">
                             <h5 class="text-white">Sistem LSP</h5>
-                            <small class="text-muted">Admin Panel</small>
+                            <small class="text-white">Admin Panel</small>
                         </div>
                         
                         <ul class="nav flex-column">
@@ -58,71 +123,104 @@
                                 </a>
                             </li>
                             
+                            <!-- REFERENSI Dropdown -->
                             <li class="nav-item mt-3">
-                                <small class="text-muted px-3">REFERENSI</small>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('asesor*') ? 'active' : '' }}" href="{{ route('asesor.index') }}">
-                                    <i class="bi bi-people"></i> Data Asesor
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('asesi*') ? 'active' : '' }}" href="{{ route('asesi.index') }}">
-                                    <i class="bi bi-person-badge"></i> Data Asesi
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('tuk*') ? 'active' : '' }}" href="{{ route('tuk.index') }}">
-                                    <i class="bi bi-geo-alt"></i> Data TUK
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('skema*') ? 'active' : '' }}" href="{{ route('skema.index') }}">
-                                    <i class="bi bi-file-text"></i> Data Skema
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                                    <i class="bi bi-person-gear"></i> Data Pengguna
-                                </a>
+                                <button class="dropdown-menu-toggle {{ request()->is('asesor*') || request()->is('asesi*') || request()->is('tuk*') || request()->is('skema*') || request()->is('users*') ? 'active' : '' }}" 
+                                        data-bs-toggle="collapse" data-bs-target="#referensiMenu" 
+                                        aria-expanded="{{ request()->is('asesor*') || request()->is('asesi*') || request()->is('tuk*') || request()->is('skema*') || request()->is('users*') ? 'true' : 'false' }}" 
+                                        aria-controls="referensiMenu">
+                                    <span><i class="bi bi-book"></i> REFERENSI</span>
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <div class="collapse {{ request()->is('asesor*') || request()->is('asesi*') || request()->is('tuk*') || request()->is('skema*') || request()->is('users*') ? 'show' : '' }}" id="referensiMenu">
+                                    <ul class="nav flex-column dropdown-menu-custom">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('asesor*') ? 'active' : '' }}" href="{{ route('asesor.index') }}">
+                                                <i class="bi bi-people"></i> Data Asesor
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('asesi*') ? 'active' : '' }}" href="{{ route('asesi.index') }}">
+                                                <i class="bi bi-person-badge"></i> Data Asesi
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('tuk*') ? 'active' : '' }}" href="{{ route('tuk.index') }}">
+                                                <i class="bi bi-geo-alt"></i> Data TUK
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('skema*') ? 'active' : '' }}" href="{{ route('skema.index') }}">
+                                                <i class="bi bi-file-text"></i> Data Skema
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                                                <i class="bi bi-person-gear"></i> Data Pengguna
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             
-                            <li class="nav-item mt-3">
-                                <small class="text-muted px-3">UJI KOMPETENSI</small>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('jadwal-ujikom*') ? 'active' : '' }}" href="{{ route('jadwal-ujikom.index') }}">
-                                    <i class="bi bi-calendar-event"></i> Jadwal
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('permohonan*') ? 'active' : '' }}" href="{{ route('permohonan.index') }}">
-                                    <i class="bi bi-file-earmark-check"></i> Permohonan
-                                </a>
+                            <!-- UJI KOMPETENSI Dropdown -->
+                            <li class="nav-item mt-2">
+                                <button class="dropdown-menu-toggle {{ request()->is('jadwal-ujikom*') || request()->is('permohonan*') ? 'active' : '' }}" 
+                                        data-bs-toggle="collapse" data-bs-target="#ujikompetEnsiMenu" 
+                                        aria-expanded="{{ request()->is('jadwal-ujikom*') || request()->is('permohonan*') ? 'true' : 'false' }}" 
+                                        aria-controls="ujikompetEnsiMenu">
+                                    <span><i class="bi bi-clipboard-check"></i> UJI KOMPETENSI</span>
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <div class="collapse {{ request()->is('jadwal-ujikom*') || request()->is('permohonan*') ? 'show' : '' }}" id="ujikompetEnsiMenu">
+                                    <ul class="nav flex-column dropdown-menu-custom">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('jadwal-ujikom*') ? 'active' : '' }}" href="{{ route('jadwal-ujikom.index') }}">
+                                                <i class="bi bi-calendar-event"></i> Jadwal
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('permohonan*') ? 'active' : '' }}" href="{{ route('permohonan.index') }}">
+                                                <i class="bi bi-file-earmark-check"></i> Permohonan
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             
-                            <li class="nav-item mt-3">
-                                <small class="text-muted px-3">PENGATURAN</small>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('tahun-aktif*') ? 'active' : '' }}" href="{{ route('tahun-aktif.index') }}">
-                                    <i class="bi bi-calendar3"></i> Tahun Aktif
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('kop-surat*') ? 'active' : '' }}" href="{{ route('kop-surat.index') }}">
-                                    <i class="bi bi-envelope"></i> Kop Surat
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('asesor-skema*') ? 'active' : '' }}" href="{{ route('asesor-skema.index') }}">
-                                    <i class="bi bi-diagram-3"></i> Asesor Skema
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('profile*') ? 'active' : '' }}" href="{{ route('profile.edit') }}">
-                                    <i class="bi bi-person-circle"></i> Profile
-                                </a>
+                            <!-- PENGATURAN Dropdown -->
+                            <li class="nav-item mt-2">
+                                <button class="dropdown-menu-toggle {{ request()->is('tahun-aktif*') || request()->is('kop-surat*') || request()->is('asesor-skema*') || request()->is('profile*') ? 'active' : '' }}" 
+                                        data-bs-toggle="collapse" data-bs-target="#pengaturanMenu" 
+                                        aria-expanded="{{ request()->is('tahun-aktif*') || request()->is('kop-surat*') || request()->is('asesor-skema*') || request()->is('profile*') ? 'true' : 'false' }}" 
+                                        aria-controls="pengaturanMenu">
+                                    <span><i class="bi bi-gear"></i> PENGATURAN</span>
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <div class="collapse {{ request()->is('tahun-aktif*') || request()->is('kop-surat*') || request()->is('asesor-skema*') || request()->is('profile*') ? 'show' : '' }}" id="pengaturanMenu">
+                                    <ul class="nav flex-column dropdown-menu-custom">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('tahun-aktif*') ? 'active' : '' }}" href="{{ route('tahun-aktif.index') }}">
+                                                <i class="bi bi-calendar3"></i> Tahun Aktif
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('kop-surat*') ? 'active' : '' }}" href="{{ route('kop-surat.index') }}">
+                                                <i class="bi bi-envelope"></i> Kop Surat
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('asesor-skema*') ? 'active' : '' }}" href="{{ route('asesor-skema.index') }}">
+                                                <i class="bi bi-diagram-3"></i> Asesor Skema
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ request()->is('profile*') ? 'active' : '' }}" href="{{ route('profile.edit') }}">
+                                                <i class="bi bi-person-circle"></i> Profile
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                         
