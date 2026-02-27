@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('asesor', function (Blueprint $table) {
             $table->id();
-            $table->string('no_reg')->unique();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('no_telepon');
-            $table->text('alamat');
+            $table->string('no')->unique();
+            $table->string('nama_lengkap');
+            $table->string('no_MET');
+            $table->string('akun');
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->string('foto')->nullable();
             $table->timestamps();

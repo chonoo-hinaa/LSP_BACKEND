@@ -12,13 +12,12 @@ class Asesor extends Model
     protected $table = 'asesor';
 
     protected $fillable = [
-        'no_reg',
-        'nama',
-        'email',
-        'no_telepon',
-        'alamat',
+        'no',
+        'nama_lengkap',
+        'no_MET',
+        'akun',
+        'foto',
         'status',
-        'foto'
     ];
 
     public function skemas()

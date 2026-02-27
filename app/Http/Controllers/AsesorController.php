@@ -22,11 +22,12 @@ class AsesorController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'no_reg' => 'required|unique:asesor,no_reg',
-            'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:asesor,email',
-            'no_telepon' => 'required|string|max:20',
-            'alamat' => 'required|string',
+            'no' => 'required|string|max:50|unique:asesor,no',
+            'nama_lengkap' => 'required|string|max:255',
+            'no_MET' => 'required|string|max:50',
+            'akun' => 'required|string|max:255',
+            'password' => 'required|string|min:6',
+            'password_confirm' => 'required|same:password',
             'status' => 'required|in:aktif,nonaktif',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
@@ -34,6 +35,10 @@ class AsesorController extends Controller
         if ($request->hasFile('foto')) {
             $validated['foto'] = $request->file('foto')->store('asesor', 'public');
         }
+
+        // Remove password fields before saving to database
+        unset($validated['password_confirm']);
+        unset($validated['password']);
 
         Asesor::create($validated);
 
@@ -55,11 +60,9 @@ class AsesorController extends Controller
     public function update(Request $request, Asesor $asesor)
     {
         $validated = $request->validate([
-            'no_reg' => 'required|unique:asesor,no_reg,' . $asesor->id,
-            'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:asesor,email,' . $asesor->id,
-            'no_telepon' => 'required|string|max:20',
-            'alamat' => 'required|string',
+            'nama_lengkap' => 'required|string|max:255',
+            'no_MET' => 'required|string|max:50',
+            'akun' => 'required|string|max:255',
             'status' => 'required|in:aktif,nonaktif',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);

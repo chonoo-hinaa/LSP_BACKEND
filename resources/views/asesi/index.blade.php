@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Data Asesor')
+@section('title', 'Data Asesi')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Data Asesor</h5>
-        <a href="{{ route('asesor.create') }}" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Tambah Data Asesor
+        <h5 class="mb-0">Data Asesi</h5>
+        <a href="{{ route('asesi.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Tambah Data Asesi
         </a>
     </div>
     <div class="card-body">
@@ -31,40 +31,38 @@
                     <tr>
                         <th>No</th>
                         <th>Foto</th>
-                        <th>Nama Lengkap</th>
-                        <th>No MET</th>
-                        <th>Akun</th>
+                        <th>NIS</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>No Telepon</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($asesors as $index => $asesor)
+                    @forelse($asesis as $index => $asesi)
                     <tr>
-                        <td>{{ $asesors->firstItem() + $index }}</td>
+                        <td>{{ $asesis->firstItem() + $index }}</td>
                         <td>
-                            @if($asesor->foto)
-                                <img src="{{ asset('storage/' . $asesor->foto) }}" alt="Foto" width="100" height="100" style="object-fit: cover;">
+                            @if($asesi->foto)
+                                <img src="{{ asset('storage/' . $asesi->foto) }}" alt="Foto" class="rounded-circle" width="50" height="50">
                             @else
-                                <div class="rounded-circle bg-secondary" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="bi bi-person" style="font-size: 40px; color: white;"></i>
+                                <div class="rounded-circle bg-secondary" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-person" style="font-size: 24px; color: white;"></i>
                                 </div>
                             @endif
                         </td>
-                        <td>{{ $asesor->nama_lengkap }}</td>
-                        <td>{{ $asesor->no_MET }}</td>
+                        <td>{{ $asesi->nis }}</td>
+                        <td>{{ $asesi->nama }}</td>
+                        <td>{{ $asesi->email }}</td>
+                        <td>{{ $asesi->no_telepon }}</td>
                         <td>
-                            <span class="badge bg-{{ $asesor->status == 'aktif' ? 'success' : 'danger' }}">
-                                {{ ucfirst($asesor->status) }}
-                            </span>
-                        </td>
-                        <td>
-                            <a href="{{ route('asesor.show', $asesor) }}" class="btn btn-success btn-sm" title="Lihat">
+                            <a href="{{ route('asesi.show', $asesi) }}" class="btn btn-success btn-sm" title="Lihat">
                                 <i class="bi bi-search"></i>
                             </a>
-                            <a href="{{ route('asesor.edit', $asesor) }}" class="btn btn-warning btn-sm" title="Edit">
+                            <a href="{{ route('asesi.edit', $asesi) }}" class="btn btn-warning btn-sm" title="Edit">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <form action="{{ route('asesor.destroy', $asesor) }}" method="POST" class="d-inline">
+                            <form action="{{ route('asesi.destroy', $asesi) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" title="Hapus" onclick="return confirm('Yakin ingin menghapus?')">
@@ -75,14 +73,14 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center py-4">Tidak ada data asesor</td>
+                        <td colspan="7" class="text-center py-4">Tidak ada data asesi</td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
         <div class="mt-3">
-            {{ $asesors->links() }}
+            {{ $asesis->links() }}
         </div>
     </div>
 </div>
