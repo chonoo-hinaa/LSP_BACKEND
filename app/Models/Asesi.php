@@ -12,19 +12,16 @@ class Asesi extends Model
     protected $table = 'asesi';
 
     protected $fillable = [
-        'nis',
+        'no_peserta',
         'nama',
-        'jenis_kelamin',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'email',
-        'no_telepon',
-        'alamat',
+        'kelas',
+        'tahun_aktif',
+        'nama_pengguna',
         'foto'
     ];
 
     protected $casts = [
-        'tanggal_lahir' => 'date'
+        'tahun_aktif' => 'integer'
     ];
 
     public function permohonan()

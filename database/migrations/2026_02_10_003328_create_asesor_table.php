@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('asesor', function (Blueprint $table) {
             $table->id();
-            $table->string('no')->unique();
             $table->string('nama_lengkap');
             $table->string('no_MET');
             $table->string('akun');

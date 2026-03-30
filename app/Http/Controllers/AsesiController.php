@@ -22,20 +22,22 @@ class AsesiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nis' => 'required|unique:asesi,nis',
+            'no_peserta' => 'required|unique:asesi,no_peserta',
             'nama' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|in:L,P',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'email' => 'required|email|unique:asesi,email',
-            'no_telepon' => 'required|string|max:20',
-            'alamat' => 'required|string',
+            'kelas' => 'required|string|max:255',
+            'tahun_aktif' => 'required|integer|min:2000|max:2100',
+            'nama_pengguna' => 'required|unique:asesi,nama_pengguna',
+            'password' => 'required|string|min:6',
+            'password_confirm' => 'required|same:password',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         if ($request->hasFile('foto')) {
             $validated['foto'] = $request->file('foto')->store('asesi', 'public');
         }
+
+        // Remove password fields before creating the record
+        unset($validated['password'], $validated['password_confirm']);
 
         Asesi::create($validated);
 
@@ -57,14 +59,10 @@ class AsesiController extends Controller
     public function update(Request $request, Asesi $asesi)
     {
         $validated = $request->validate([
-            'nis' => 'required|unique:asesi,nis,' . $asesi->id,
             'nama' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|in:L,P',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'email' => 'required|email|unique:asesi,email,' . $asesi->id,
-            'no_telepon' => 'required|string|max:20',
-            'alamat' => 'required|string',
+            'kelas' => 'required|string|max:255',
+            'tahun_aktif' => 'required|integer|min:2000|max:2100',
+            'nama_pengguna' => 'required|unique:asesi,nama_pengguna,' . $asesi->id,
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 

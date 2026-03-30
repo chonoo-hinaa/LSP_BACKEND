@@ -22,7 +22,6 @@ class AsesorController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'no' => 'required|string|max:50|unique:asesor,no',
             'nama_lengkap' => 'required|string|max:255',
             'no_MET' => 'required|string|max:50',
             'akun' => 'required|string|max:255',

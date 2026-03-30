@@ -26,15 +26,15 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table table-striped table-hover datatable">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Foto</th>
-                        <th>NIS</th>
+                        <th>No Peserta</th>
                         <th>Nama</th>
-                        <th>Email</th>
-                        <th>No Telepon</th>
+                        <th>Kelas</th>
+                        <th>Tahun Aktif</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -44,17 +44,17 @@
                         <td>{{ $asesis->firstItem() + $index }}</td>
                         <td>
                             @if($asesi->foto)
-                                <img src="{{ asset('storage/' . $asesi->foto) }}" alt="Foto" class="rounded-circle" width="50" height="50">
+                                <img src="{{ asset('storage/' . $asesi->foto) }}" alt="Foto" width="100" height="100" style="object-fit: cover;">
                             @else
                                 <div class="rounded-circle bg-secondary" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
                                     <i class="bi bi-person" style="font-size: 24px; color: white;"></i>
                                 </div>
                             @endif
                         </td>
-                        <td>{{ $asesi->nis }}</td>
+                        <td>{{ $asesi->no_peserta }}</td>
                         <td>{{ $asesi->nama }}</td>
-                        <td>{{ $asesi->email }}</td>
-                        <td>{{ $asesi->no_telepon }}</td>
+                        <td>{{ $asesi->kelas }}</td>
+                        <td>{{ $asesi->tahun_aktif }}</td>
                         <td>
                             <a href="{{ route('asesi.show', $asesi) }}" class="btn btn-success btn-sm" title="Lihat">
                                 <i class="bi bi-search"></i>

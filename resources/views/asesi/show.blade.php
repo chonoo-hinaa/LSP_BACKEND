@@ -29,36 +29,24 @@
             <div class="col-md-9">
                 <table class="table table-borderless">
                     <tr>
-                        <td class="fw-bold" style="width: 200px;">NIS</td>
-                        <td>: {{ $asesi->nis }}</td>
+                        <td class="fw-bold" style="width: 200px;">No Peserta</td>
+                        <td>: {{ $asesi->no_peserta }}</td>
                     </tr>
                     <tr>
                         <td class="fw-bold">Nama Lengkap</td>
                         <td>: {{ $asesi->nama }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Jenis Kelamin</td>
-                        <td>: {{ $asesi->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                        <td class="fw-bold">Kelas</td>
+                        <td>: {{ $asesi->kelas }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Tempat Lahir</td>
-                        <td>: {{ $asesi->tempat_lahir }}</td>
+                        <td class="fw-bold">Tahun Aktif</td>
+                        <td>: {{ $asesi->tahun_aktif }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Tanggal Lahir</td>
-                        <td>: {{ $asesi->tanggal_lahir->format('d-m-Y') }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Email</td>
-                        <td>: {{ $asesi->email }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">No Telepon</td>
-                        <td>: {{ $asesi->no_telepon }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Alamat</td>
-                        <td>: {{ $asesi->alamat }}</td>
+                        <td class="fw-bold">Nama Pengguna</td>
+                        <td>: {{ $asesi->nama_pengguna }}</td>
                     </tr>
                 </table>
             </div>

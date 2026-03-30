@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('asesi', function (Blueprint $table) {
             $table->id();
-            $table->string('nis')->unique();
-            $table->string('name');
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->string('email')->unique();
-            $table->string('no_telepon');
-            $table->text('alamat');
+            $table->string('no_peserta')->unique();
+            $table->string('nama');
+            $table->string('kelas');
+            $table->integer('tahun_aktif');
+            $table->string('nama_pengguna')->unique();
             $table->string('foto')->nullable();
             $table->timestamps();
         });
