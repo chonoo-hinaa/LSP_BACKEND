@@ -6,9 +6,24 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Data Asesi</h5>
-        <a href="{{ route('asesi.create') }}" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Tambah Data Asesi
-        </a>
+        <div class="d-flex gap-2">
+            <a href="{{ route('asesi.create') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Tambah Data Asesi
+            </a>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="bi bi-gear"></i> Opsi Data
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{ route('asesi.export') }}">
+                        <i class="bi bi-download"></i> Export Data Asesi
+                    </a></li>
+                    <li><a class="dropdown-item" href="{{ route('asesi.import') }}">
+                        <i class="bi bi-upload"></i> Import Data Asesi
+                    </a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-3">

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asesor;
+use App\Exports\AsesorExport;
+use App\Imports\AsesorImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AsesorController extends Controller
 {
@@ -89,5 +92,37 @@ class AsesorController extends Controller
 
         return redirect()->route('asesor.index')
             ->with('success', 'Data asesor berhasil dihapus.');
+    }
+
+    public function exportData()
+    {
+        return Excel::download(new AsesorExport, 'Data_Asesor.xlsx');
+    }
+
+    public function importView()
+    {
+        return view('asesor.import');
+    }
+
+    public function importData(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        try {
+            Excel::import(new AsesorImport, $request->file('file'));
+
+            return redirect()->route('asesor.index')
+                ->with('success', 'Data asesor berhasil diimpor.');
+        } catch (\Exception $e) {
+            return back()
+                ->with('error', 'Gagal mengimpor data: ' . $e->getMessage());
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        return Excel::download(new AsesorExport, 'Template_Asesor.xlsx');
     }
 }

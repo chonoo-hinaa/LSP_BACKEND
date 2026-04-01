@@ -6,9 +6,24 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Data Asesor</h5>
-        <a href="{{ route('asesor.create') }}" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Tambah Data Asesor
-        </a>
+        <div class="d-flex gap-2">
+            <a href="{{ route('asesor.create') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Tambah Data Asesor
+            </a>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="bi bi-gear"></i> Opsi Data
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{ route('asesor.export') }}">
+                        <i class="bi bi-download"></i> Export Data Asesor
+                    </a></li>
+                    <li><a class="dropdown-item" href="{{ route('asesor.import') }}">
+                        <i class="bi bi-upload"></i> Import Data Asesor
+                    </a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -45,8 +60,8 @@
                             @if($asesor->foto)
                                 <img src="{{ asset('storage/' . $asesor->foto) }}" alt="Foto" width="100" height="100" style="object-fit: cover;">
                             @else
-                                <div class="rounded-circle bg-secondary" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="bi bi-person" style="font-size: 40px; color: white;"></i>
+                                <div class="rounded-circle bg-secondary" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="bi bi-person" style="font-size: 24px; color: white;"></i>
                                 </div>
                             @endif
                         </td>

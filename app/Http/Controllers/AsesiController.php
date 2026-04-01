@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asesi;
+use App\Exports\AsesiExport;
+use App\Imports\AsesiImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AsesiController extends Controller
 {
@@ -89,5 +92,37 @@ class AsesiController extends Controller
 
         return redirect()->route('asesi.index')
             ->with('success', 'Data asesi berhasil dihapus.');
+    }
+
+    public function exportData()
+    {
+        return Excel::download(new AsesiExport, 'Data_Asesi.xlsx');
+    }
+
+    public function importView()
+    {
+        return view('asesi.import');
+    }
+
+    public function importData(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        try {
+            Excel::import(new AsesiImport, $request->file('file'));
+
+            return redirect()->route('asesi.index')
+                ->with('success', 'Data asesi berhasil diimpor.');
+        } catch (\Exception $e) {
+            return back()
+                ->with('error', 'Gagal mengimpor data: ' . $e->getMessage());
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        return Excel::download(new AsesiExport, 'Template_Asesi.xlsx');
     }
 }

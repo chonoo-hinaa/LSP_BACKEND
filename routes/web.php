@@ -24,10 +24,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Asesor
+    // Asesor - Custom routes before resource routes
+    Route::get('asesor/export-data', [AsesorController::class, 'exportData'])->name('asesor.export');
+    Route::get('asesor/import', [AsesorController::class, 'importView'])->name('asesor.import');
+    Route::post('asesor/import-data', [AsesorController::class, 'importData'])->name('asesor.import-data');
+    Route::get('asesor/download-template', [AsesorController::class, 'downloadTemplate'])->name('asesor.download-template');
     Route::resource('asesor', AsesorController::class);
     
-    // Asesi
+    // Asesi - Custom routes before resource routes
+    Route::get('asesi/export-data', [AsesiController::class, 'exportData'])->name('asesi.export');
+    Route::get('asesi/import', [AsesiController::class, 'importView'])->name('asesi.import');
+    Route::post('asesi/import-data', [AsesiController::class, 'importData'])->name('asesi.import-data');
+    Route::get('asesi/download-template', [AsesiController::class, 'downloadTemplate'])->name('asesi.download-template');
     Route::resource('asesi', AsesiController::class);
     
     // TUK
