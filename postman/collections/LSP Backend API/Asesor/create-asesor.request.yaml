@@ -1,0 +1,43 @@
+$kind: http-request
+name: 'Create Asesor'
+method: POST
+url: '{{baseUrl}}/api/asesor'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Sample Asesor",
+      "email": "asesor@example.com",
+      "phone": "081234567890",
+      "notes": "TODO: adjust payload fields to match Laravel validation rules"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is created or successful", function () {
+        pm.expect(pm.response.code).to.be.oneOf([200, 201]);
+      });
+
+      pm.test("Content-Type is JSON when present", function () {
+        const contentType = pm.response.headers.get("Content-Type");
+        if (contentType) {
+          pm.expect(contentType).to.include("application/json");
+        }
+      });
+
+      let data;
+      try {
+        data = pm.response.json();
+      } catch (e) {
+        data = null;
+      }
+
+      const candidate = data && (data.data || data);
+      if (candidate && candidate.id !== undefined && candidate.id !== null) {
+        pm.environment.set("asesorId", String(candidate.id));
+      }

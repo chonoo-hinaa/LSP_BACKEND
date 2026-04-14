@@ -1,0 +1,40 @@
+$kind: http-request
+name: 'Update Asesor'
+method: PUT
+url: '{{baseUrl}}/api/asesor/{{asesorId}}'
+order: 4000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nama_lengkap": "Siti Aminah Update",
+      "no_MET": "MET-2026-001-REV",
+      "akun": "siti.aminah.update",
+      "foto": "profiles/asesor/siti-aminah-update.jpg",
+      "status": "nonaktif"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is successful", function () {
+        pm.expect(pm.response.code).to.equal(200);
+      });
+
+      pm.test("Response is valid JSON", function () {
+        pm.expect(function () {
+          pm.response.json();
+        }).to.not.throw();
+      });
+
+      pm.test("Response body has basic JSON object structure", function () {
+        const jsonData = pm.response.json();
+        pm.expect(jsonData).to.be.an("object");
+        pm.expect(jsonData).to.have.property("success");
+        pm.expect(jsonData).to.have.property("message");
+        pm.expect(jsonData).to.have.property("data");
+        pm.expect(jsonData.data).to.be.an("object");
+      });

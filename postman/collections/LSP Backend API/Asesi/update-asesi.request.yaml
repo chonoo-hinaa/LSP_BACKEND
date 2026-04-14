@@ -1,0 +1,31 @@
+$kind: http-request
+name: 'Update Asesi'
+method: PUT
+url: '{{baseUrl}}/api/asesi/{{asesiId}}'
+order: 4000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Updated Asesi",
+      "email": "updated-asesi@example.com",
+      "phone": "081234567891",
+      "notes": "TODO: adjust update payload fields to match Laravel validation rules"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is successful", function () {
+        pm.expect(pm.response.code).to.be.oneOf([200, 202]);
+      });
+
+      pm.test("Content-Type is JSON when present", function () {
+        const contentType = pm.response.headers.get("Content-Type");
+        if (contentType) {
+          pm.expect(contentType).to.include("application/json");
+        }
+      });

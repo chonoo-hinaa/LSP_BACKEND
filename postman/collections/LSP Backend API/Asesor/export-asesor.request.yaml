@@ -1,0 +1,16 @@
+$kind: http-request
+name: 'Export Asesor'
+method: GET
+url: '{{baseUrl}}/api/asesor/export'
+order: 7000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is successful", function () {
+        pm.expect(pm.response.code).to.be.oneOf([200]);
+      });
+
+      pm.test("Response has content", function () {
+        pm.expect(pm.response.text()).to.not.equal("");
+      });

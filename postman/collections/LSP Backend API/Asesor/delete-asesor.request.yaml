@@ -1,0 +1,21 @@
+$kind: http-request
+name: 'Delete Asesor'
+method: DELETE
+url: '{{baseUrl}}/api/asesor/{{asesorId}}'
+order: 5000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is successful or no content", function () {
+        pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);
+      });
+
+      if (pm.response.code !== 204) {
+        pm.test("Content-Type is JSON when present", function () {
+          const contentType = pm.response.headers.get("Content-Type");
+          if (contentType) {
+            pm.expect(contentType).to.include("application/json");
+          }
+        });
+      }

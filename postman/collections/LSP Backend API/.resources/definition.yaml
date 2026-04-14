@@ -1,0 +1,51 @@
+$kind: collection
+name: 'LSP Backend API'
+description: 'Local Postman collection for Laravel API resources Asesi and Asesor.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost'
+$kind: collection
+name: 'LSP Backend API'
+description: 'Local Postman collection for Laravel API resources Asesi and Asesor.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8000'
+  - key: asesiId
+    value: '1'
+  - key: asesorId
+$kind: collection
+name: 'LSP Backend API'
+description: 'Local Postman collection for Laravel API resources Asesi and Asesor.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8000'
+  - key: asesiId
+    value: '1'
+  - key: asesorId
+$kind: collection
+name: 'LSP Backend API'
+description: 'Local Postman collection for Laravel API resources Asesi and Asesor.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8000'
+  - key: asesiId
+    value: '1'
+  - key: asesorId
+    value: '1'
+  - key: asesiImportFilePath
+    value: 'C:/path/to/asesi-import.xlsx'
+  - key: asesorImportFilePath
+$kind: collection
+name: 'LSP Backend API'
+description: 'Local Postman collection for Laravel API resources Asesi and Asesor.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8000'
+  - key: asesiId
+    value: '1'
+  - key: asesorId
+    value: '1'
+  - key: asesiImportFilePath
+    value: 'C:/path/to/asesi-import.xlsx'
+  - key: asesorImportFilePath
+    value: 'C:/path/to/asesor-import.xlsx'

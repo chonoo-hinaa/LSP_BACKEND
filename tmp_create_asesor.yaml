@@ -1,0 +1,46 @@
+$kind: http-request
+name: 'Create Asesor'
+method: POST
+url: '{{baseUrl}}/api/asesor'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nama_lengkap": "Siti Aminah",
+      "no_MET": "MET-2026-001",
+      "akun": "siti.aminah",
+      "foto": "profiles/asesor/siti-aminah.jpg",
+      "status": "aktif"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is created", function () {
+        pm.expect(pm.response.code).to.equal(201);
+      });
+
+      pm.test("Response is valid JSON", function () {
+        pm.expect(function () {
+          pm.response.json();
+        }).to.not.throw();
+      });
+
+      pm.test("Response body has basic JSON object structure", function () {
+        const jsonData = pm.response.json();
+        pm.expect(jsonData).to.be.an("object");
+        pm.expect(jsonData).to.have.property("success");
+        pm.expect(jsonData).to.have.property("message");
+        pm.expect(jsonData).to.have.property("data");
+        pm.expect(jsonData.data).to.be.an("object");
+      });
+
+      const jsonData = pm.response.json();
+      const candidate = jsonData.data;
+      if (candidate && candidate.id !== undefined && candidate.id !== null) {
+        pm.environment.set("asesorId", String(candidate.id));
+      }

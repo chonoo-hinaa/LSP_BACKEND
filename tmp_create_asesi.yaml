@@ -1,0 +1,47 @@
+$kind: http-request
+name: 'Create Asesi'
+method: POST
+url: '{{baseUrl}}/api/asesi'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "no_peserta": "ASESI-2026-001",
+      "nama": "Budi Santoso",
+      "kelas": "XII RPL 1",
+      "tahun_aktif": 2026,
+      "nama_pengguna": "budi.santoso",
+      "foto": "profiles/asesi/budi-santoso.jpg"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is created", function () {
+        pm.expect(pm.response.code).to.equal(201);
+      });
+
+      pm.test("Response is valid JSON", function () {
+        pm.expect(function () {
+          pm.response.json();
+        }).to.not.throw();
+      });
+
+      pm.test("Response body has basic JSON object structure", function () {
+        const jsonData = pm.response.json();
+        pm.expect(jsonData).to.be.an("object");
+        pm.expect(jsonData).to.have.property("success");
+        pm.expect(jsonData).to.have.property("message");
+        pm.expect(jsonData).to.have.property("data");
+        pm.expect(jsonData.data).to.be.an("object");
+      });
+
+      const jsonData = pm.response.json();
+      const candidate = jsonData.data;
+      if (candidate && candidate.id !== undefined && candidate.id !== null) {
+        pm.environment.set("asesiId", String(candidate.id));
+      }

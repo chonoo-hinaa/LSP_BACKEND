@@ -1,0 +1,31 @@
+$kind: http-request
+name: 'Get Asesi By ID'
+method: GET
+url: '{{baseUrl}}/api/asesi/{{asesiId}}'
+order: 3000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is successful", function () {
+        pm.expect(pm.response.code).to.be.oneOf([200]);
+      });
+
+      pm.test("Content-Type is JSON when present", function () {
+        const contentType = pm.response.headers.get("Content-Type");
+        if (contentType) {
+          pm.expect(contentType).to.include("application/json");
+        }
+      });
+
+      let data;
+      try {
+        data = pm.response.json();
+      } catch (e) {
+        data = null;
+      }
+
+      const candidate = data && (data.data || data);
+      if (candidate && candidate.id !== undefined && candidate.id !== null) {
+        pm.environment.set("asesiId", String(candidate.id));
+      }

@@ -1,0 +1,22 @@
+name: 'LSP Backend Local'
+values:
+  - key: baseUrl
+    value: 'http://localhost:8000'
+    enabled: true
+    type: default
+  - key: asesiId
+    value: '1'
+    enabled: true
+    type: default
+  - key: asesorId
+    value: '1'
+    enabled: true
+    type: default
+  - key: asesiImportFilePath
+    value: 'C:/path/to/asesi-import.xlsx'
+    enabled: true
+    type: default
+  - key: asesorImportFilePath
+    value: 'C:/path/to/asesor-import.xlsx'
+    enabled: true
+    type: default

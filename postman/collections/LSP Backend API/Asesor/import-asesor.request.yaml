@@ -1,0 +1,26 @@
+$kind: http-request
+name: 'Import Asesor'
+method: POST
+url: '{{baseUrl}}/api/asesor/import'
+order: 6000
+body:
+  type: formdata
+  content:
+    - key: file
+      type: file
+      src: '{{asesorImportFilePath}}'
+      description: 'Sample import file path placeholder. Update to a real local file before sending.'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is successful", function () {
+        pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);
+      });
+
+      pm.test("Content-Type is JSON when present", function () {
+        const contentType = pm.response.headers.get("Content-Type");
+        if (contentType) {
+          pm.expect(contentType).to.include("application/json");
+        }
+      });
