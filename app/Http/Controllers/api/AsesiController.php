@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Exports\AsesiExport;
 use App\Imports\AsesiImport;
@@ -8,6 +8,7 @@ use App\Models\Asesi;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class AsesiController extends Controller
 {

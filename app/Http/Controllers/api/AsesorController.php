@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Exports\AsesorExport;
 use App\Imports\AsesorImport;
@@ -8,6 +8,7 @@ use App\Models\Asesor;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class AsesorController extends Controller
 {
