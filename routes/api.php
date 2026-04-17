@@ -26,13 +26,14 @@ Route::middleware('api')->group(function () {
         Route::get('export', [AsesorController::class, 'exportData']);    // Export
     });
 
-Route::prefix('tuks')->group(function () {
-Route::get('/', [TukController::class, 'index']);
-Route::post('/', [TukController::class, 'store']);
-Route::get('{id}', [TukController::class, 'show']);
-Route::put('{id}', [TukController::class, 'update']);
-Route::patch('{id}', [TukController::class, 'update']);
-Route::delete('{id}', [TukController::class, 'destroy']);
-});
+   
+    Route::prefix('tuks')->group(function () {
+        Route::get('/', [TukController::class, 'index']);
+        Route::post('/', [TukController::class, 'store']);
+        Route::get('{id}', [TukController::class, 'show']);
+        Route::put('{id}', [TukController::class, 'update']);
+        Route::patch('{id}', [TukController::class, 'update']);
+        Route::delete('{id}', [TukController::class, 'destroy']);
+    });
 
-});
+    }); 
