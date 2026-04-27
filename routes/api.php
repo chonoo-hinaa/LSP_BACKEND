@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AsesiController;
 use App\Http\Controllers\Api\AsesorController;
 use App\Http\Controllers\Api\TukController;
-use App\Http\Controllers\Api\akuncontroller;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;           
 
 Route::middleware('api')->group(function () {
@@ -39,13 +39,13 @@ Route::middleware('api')->group(function () {
 
     // Users Routes
     Route::prefix('users')->group(function () {
-        Route::get('/', [akuncontroller::class, 'index']);              // List all
-        Route::post('/', [akuncontroller::class, 'store']);             // Create
-        Route::get('{id}', [akuncontroller::class, 'show']);            // Show
-        Route::put('{id}', [akuncontroller::class, 'update']);          // Update
-        Route::patch('{id}', [akuncontroller::class, 'update']);        // Update
-        Route::delete('{id}', [akuncontroller::class, 'destroy']);      // Delete
-        Route::post('{id}/reset-password', [akuncontroller::class, 'resetPassword']); // Reset Password
+        Route::get('/', [UserController::class, 'index']);              // List all
+        Route::post('/', [UserController::class, 'store']);             // Create
+        Route::get('{id}', [UserController::class, 'show']);            // Show
+        Route::put('{id}', [UserController::class, 'update']);          // Update
+        Route::patch('{id}', [UserController::class, 'update']);        // Update
+        Route::delete('{id}', [UserController::class, 'destroy']);      // Delete
+        Route::post('{id}/reset-password', [UserController::class, 'resetPassword']); // Reset Password
     });
 
     });
