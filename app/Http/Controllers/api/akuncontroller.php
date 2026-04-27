@@ -18,7 +18,7 @@ class akuncontroller extends Controller
             $query->where('level', $request->level);
         }
 
-        $users = $query->latest()->paginate(5);
+        $users = $query->orderBy('id')->paginate(5);
 
         return response()->json([
             'success' => true,

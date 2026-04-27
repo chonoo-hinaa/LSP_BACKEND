@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AsesiController;
 use App\Http\Controllers\Api\AsesorController;
 use App\Http\Controllers\Api\TukController;
+use App\Http\Controllers\Api\akuncontroller;
 use Illuminate\Support\Facades\Route;           
 
 Route::middleware('api')->group(function () {
@@ -36,4 +37,16 @@ Route::middleware('api')->group(function () {
         Route::delete('{id}', [TukController::class, 'destroy']);
     });
 
-    }); 
+    // Users Routes
+    Route::prefix('users')->group(function () {
+        Route::get('/', [akuncontroller::class, 'index']);              // List all
+        Route::post('/', [akuncontroller::class, 'store']);             // Create
+        Route::get('{id}', [akuncontroller::class, 'show']);            // Show
+        Route::put('{id}', [akuncontroller::class, 'update']);          // Update
+        Route::patch('{id}', [akuncontroller::class, 'update']);        // Update
+        Route::delete('{id}', [akuncontroller::class, 'destroy']);      // Delete
+        Route::post('{id}/reset-password', [akuncontroller::class, 'resetPassword']); // Reset Password
+    });
+
+    });
+    

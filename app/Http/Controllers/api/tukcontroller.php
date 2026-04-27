@@ -16,7 +16,7 @@ class TukController extends Controller
     public function index()
     {
         try {
-            $tuk = Tuk::paginate(15);
+            $tuk = Tuk::orderBy('id')->paginate(15);
             
             return response()->json([
                 'success' => true,
