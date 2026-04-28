@@ -36,4 +36,9 @@ class Skema extends Model
     {
         return $this->hasMany(JadwalUjikom::class);
     }
+
+    public function muks()
+    {
+        return $this->hasMany(Muk::class);
+    }
 }
